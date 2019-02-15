@@ -18,10 +18,5 @@ module.exports = {
                 }
             }
         ]
-    },
-    devServer: {
-        port: 1337,
-        open: true,
-        proxy: 'http://localhost:3000'
-    },
+    }
 };

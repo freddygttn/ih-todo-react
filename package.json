@@ -6,8 +6,8 @@
     "build": "webpack --mode production",
     "start": "npm run build && npm run server",
     "server": "PORT=3000 node ./bin/www",
-    "server-dev": "DEBUG=todolistapi:* nodemon ./bin/www",
-    "client-dev": "webpack-dev-server --open --mode development",
+    "server-dev": "PORT=3000 DEBUG=todolistapi:* nodemon ./bin/www",
+    "client-dev": "webpack --mode development --watch",
     "dev": "concurrently \"npm run server-dev\" \"npm run client-dev\""
   },
   "dependencies": {
@@ -24,6 +24,8 @@
     "node-sass-middleware": "0.11.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
+    "react": "^16.8.2",
+    "react-dom": "^16.8.2",
     "serve-favicon": "~2.4.5"
   },
   "devDependencies": {
@@ -34,10 +36,7 @@
     "concurrently": "^4.1.0",
     "nodemon": "^1.12.1",
     "prop-types": "^15.7.2",
-    "react": "^16.8.2",
-    "react-dom": "^16.8.2",
     "webpack": "^4.29.4",
-    "webpack-cli": "^3.2.3",
-    "webpack-dev-server": "^3.1.14"
+    "webpack-cli": "^3.2.3"
   }
 }
