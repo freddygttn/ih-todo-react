@@ -3,8 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "dev": "DEBUG=todolistapi:* nodemon ./bin/www"
+    "build": "webpack --mode production",
+    "start": "npm run build && npm run server",
+    "server": "PORT=3000 node ./bin/www",
+    "server-dev": "PORT=3000 DEBUG=todolistapi:* nodemon ./bin/www",
+    "client-dev": "webpack --mode development --watch",
+    "dev": "concurrently \"npm run server-dev\" \"npm run client-dev\""
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -20,9 +24,19 @@
     "node-sass-middleware": "0.11.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
+    "react": "^16.8.2",
+    "react-dom": "^16.8.2",
     "serve-favicon": "~2.4.5"
   },
   "devDependencies": {
-    "nodemon": "^1.12.1"
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "concurrently": "^4.1.0",
+    "nodemon": "^1.12.1",
+    "prop-types": "^15.7.2",
+    "webpack": "^4.29.4",
+    "webpack-cli": "^3.2.3"
   }
 }
