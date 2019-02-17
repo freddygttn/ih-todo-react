@@ -74,7 +74,7 @@ class AppRoot extends React.Component {
             case Status.LoggedIn:
                 return (<div>
                     <div>
-                        <span>Logged in as {this.state.user.username}.</span>
+                        <span>Logged in as {this.state.user.username}</span>
                         <button onClick={() => this.logout()}>Logout</button>
                     </div>
                     <TodoList />

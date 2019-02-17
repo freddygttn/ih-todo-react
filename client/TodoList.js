@@ -1,6 +1,9 @@
 import React from "react";
 import TaskApi from "./data/TaskApi";
 
+import Todo from "./Todo";
+import TodoEdition from "./TodoEdition";
+
 class TodoList extends React.Component {
     constructor() {
         super();
@@ -16,7 +19,7 @@ class TodoList extends React.Component {
                 if (response.data) {
                     this.setState((state, props) => ({ ...state, todos: response.data }));
                 }
-            })
+            });
     }
 
     create() {
@@ -24,14 +27,13 @@ class TodoList extends React.Component {
         const description = this.descriptionInput.value;
         TaskApi.create(title, description)
             .then((response) => {
-                console.log(response);
                 if (response.data && response.data._id) {
                     this.setState((state, props) => ({ ...state, todos: [response.data].concat(state.todos) }));
                 }
             })
             .catch(error => {
                 this.setState((state, props) => ({ ...state, error }));
-            })
+            });
     }
 
     remove(id) {
@@ -47,7 +49,39 @@ class TodoList extends React.Component {
             })
             .catch(error => {
                 this.setState((state, props) => ({ ...state, error }));
+            });
+    }
+
+    update(id, title, description) {
+        TaskApi.update(id, title, description)
+            .then((response) => {
+                if (response.data && response.data._id) {
+                    this.setState((state, props) => ({
+                        ...state, todos: state.todos.map(todo =>
+                            todo._id === response.data._id ?
+                                { ...response.data, title, description }
+                                : todo
+                        )
+                    }));
+                }
             })
+            .catch(error => {
+                this.setState((state, props) => ({ ...state, error }));
+            });
+    }
+
+    edit(id) {
+        this.setState((state, props) => ({
+            ...state,
+            todos: state.todos.map(todo => ({ ...todo, editing: todo.editing || todo._id === id }))
+        }));
+    }
+
+    cancelEdit(id) {
+        this.setState((state, props) => ({
+            ...state,
+            todos: state.todos.map(todo => ({ ...todo, editing: todo.editing && todo._id !== id }))
+        }));
     }
 
     render() {
@@ -73,13 +107,30 @@ class TodoList extends React.Component {
                 </form>
                 <h3>Todos</h3>
                 <ul>
-                    {this.state.todos.map(todo => (
-                        <li key={todo._id}>
-                            <div>{todo.title}</div>
-                            <div>{todo.description}</div>
-                            <button onClick={() => { this.remove(todo._id) }}>Remove</button>
-                        </li>
-                    ))}
+                    {this.state.todos.map(todo => {
+                        return todo.editing ?
+                            (
+                                <li key={todo._id}>
+                                    <TodoEdition
+                                        todo={todo}
+                                        handleCancel={() => this.cancelEdit(todo._id)}
+                                        handleUpdate={(title, description) => {
+                                            this.update(todo._id, title, description);
+                                        }} />
+                                </li>
+                            )
+                            :
+                            (
+                                <li key={todo._id}>
+                                    <Todo
+                                        todo={todo}
+                                        handleRemove={() => this.remove(todo._id)}
+                                        handleEdit={() => this.edit(todo._id)}
+                                    />
+                                </li>
+                            )
+                    })
+                    }
                 </ul>
             </div>
         );

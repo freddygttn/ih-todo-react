@@ -38,7 +38,7 @@ class Login extends React.Component {
                         <input type="password" ref={e => this.passwordInput = e} />
                     </div>
                     <div>
-                        <button onClick={(e) => { e.preventDefault(); this.login(); }}>Sign in</button>
+                        <button onClick={(e) => { e.preventDefault(); this.login(); }}>Log in</button>
                     </div>
                     <div>
                         {this.state.error ? this.state.error : ""}
