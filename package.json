@@ -8,9 +8,10 @@
     "server": "PORT=3000 node ./bin/www",
     "server-dev": "PORT=3000 DEBUG=todolistapi:* nodemon ./bin/www",
     "client-dev": "webpack --mode development --watch",
-    "dev": "concurrently \"npm run server-dev\" \"npm run client-dev\""
+    "dev": "concurrently \"npm run server\" \"npm run client-dev\""
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
