@@ -1,5 +1,5 @@
 import React from "react";
-import Api from "./Api";
+import Api from "./data/AuthApi";
 
 class SignUp extends React.Component {
     constructor() {

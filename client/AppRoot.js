@@ -1,9 +1,9 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import Api from "./Api";
+import Api from "./data/AuthApi";
 
 import Login from "./Login";
 import SignUp from "./SignUp";
+import TodoList from "./TodoList";
 
 const Status = {
     "Loading": "STATUS/LOADING",
@@ -73,8 +73,11 @@ class AppRoot extends React.Component {
                     goToLogin={() => this.updateStatus(Status.Login)} />;
             case Status.LoggedIn:
                 return (<div>
-                    Hello {this.state.user.username}!
-                    <button onClick={() => this.logout()}>Logout</button>
+                    <div>
+                        <span>Logged in as {this.state.user.username}.</span>
+                        <button onClick={() => this.logout()}>Logout</button>
+                    </div>
+                    <TodoList />
                 </div>);
             default:
                 return (<div>
