@@ -34,6 +34,22 @@ class TodoList extends React.Component {
             })
     }
 
+    remove(id) {
+        TaskApi.remove(id)
+            .then((response) => {
+                if (response.data && response.data._id) {
+                    const indexToRemove = this.state.todos.findIndex(todo => todo._id === response.data._id);
+                    this.setState((state, props) => ({
+                        ...state,
+                        todos: state.todos.slice(0, indexToRemove).concat(state.todos.slice(indexToRemove + 1, state.todos.length)),
+                    }));
+                }
+            })
+            .catch(error => {
+                this.setState((state, props) => ({ ...state, error }));
+            })
+    }
+
     render() {
         return (
             <div>
@@ -57,7 +73,13 @@ class TodoList extends React.Component {
                 </form>
                 <h3>Todos</h3>
                 <ul>
-                    {this.state.todos.map(todo => (<li key={todo._id}><div>{todo.title}</div><div>{todo.description}</div></li>))}
+                    {this.state.todos.map(todo => (
+                        <li key={todo._id}>
+                            <div>{todo.title}</div>
+                            <div>{todo.description}</div>
+                            <button onClick={() => { this.remove(todo._id) }}>Remove</button>
+                        </li>
+                    ))}
                 </ul>
             </div>
         );

@@ -22,10 +22,7 @@ export const update = (id, title, description) => {
 }
 
 export const remove = (id) => {
-    return axios.post(`${endpoint}/delete/${id}`, {
-        username,
-        password,
-    });
+    return axios.post(`${endpoint}/delete/${id}`, {});
 }
 
 export default {
