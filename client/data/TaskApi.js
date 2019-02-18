@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// TODO put that into a config file
+// This should be put into a config file
 const endpoint = "http://localhost:3000/api/tasks";
 
 export const list = () => {

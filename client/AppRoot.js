@@ -5,12 +5,16 @@ import AuthContainer from "./domain/AuthContainer";
 import TodosContainer from "./domain/TodosContainer";
 import NotFound from "./ui/NotFound";
 
+// Status handled by this component
 const AppStatus = {
     "Loading": "STATUS/LOADING",
     "LoggedIn": "STATUS/LOGGED_IN",
     "NeedAuth": "STATUS/NEED_AUTH",
 }
 
+/**
+ * Root of the app. Checks if a user is logged in and renders the component accordingly.
+ */
 class AppRoot extends React.Component {
     constructor() {
         super();

@@ -4,6 +4,9 @@ import PropTypes from "prop-types";
 import Todo from "./Todo";
 import TodoEdition from "./TodoEdition";
 
+/**
+ * Renders a list of Todos.
+ */
 class TodoList extends React.PureComponent {
     render() {
         return (

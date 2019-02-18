@@ -1,6 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+/**
+ * Renders a Todo in edit mode.
+ */
 class TodoEdition extends React.PureComponent {
     constructor() {
         super();

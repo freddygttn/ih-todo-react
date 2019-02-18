@@ -1,6 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+/**
+ * Renders a todo.
+ */
 export const Todo = ({ todo, handleRemove, handleEdit, ...props }) => {
     return (
         <div>

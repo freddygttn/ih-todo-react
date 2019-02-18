@@ -3,6 +3,9 @@ import TaskApi from "../data/TaskApi";
 
 import TodoList from "../ui/todo/TodoList";
 
+/**
+ * Containers that encapsulates todos logic.
+ */
 class TodosContainer extends React.Component {
     constructor() {
         super();
@@ -19,6 +22,7 @@ class TodosContainer extends React.Component {
     }
 
     componentDidMount() {
+        // Load todos as soon as the component is mounted
         TaskApi.list()
             .then((response) => {
                 if (response.data) {
@@ -27,6 +31,7 @@ class TodosContainer extends React.Component {
             });
     }
 
+    // Creates a todo given a title and a description
     create(title, description) {
         TaskApi.create(title, description)
             .then((response) => {
@@ -39,6 +44,7 @@ class TodosContainer extends React.Component {
             });
     }
 
+    // Removes a todo given its id
     remove(id) {
         TaskApi.remove(id)
             .then((response) => {
@@ -55,6 +61,7 @@ class TodosContainer extends React.Component {
             });
     }
 
+    // Updates a todo given its id, its new title and new description
     update(id, title, description) {
         TaskApi.update(id, title, description)
             .then((response) => {
@@ -73,6 +80,7 @@ class TodosContainer extends React.Component {
             });
     }
 
+    // Set a todo to edit mode
     edit(id) {
         this.setState((state) => ({
             ...state,
@@ -80,6 +88,7 @@ class TodosContainer extends React.Component {
         }));
     }
 
+    // Cancel todo edit mode
     cancelEdit(id) {
         this.setState((state) => ({
             ...state,
