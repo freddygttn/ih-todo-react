@@ -2,7 +2,7 @@ import React from "react";
 import Api from "./data/AuthApi";
 
 import AuthContainer from "./domain/AuthContainer";
-import TodoList from "./TodoList";
+import TodosContainer from "./domain/TodosContainer";
 
 const AppStatus = {
     "Loading": "STATUS/LOADING",
@@ -75,7 +75,7 @@ class AppRoot extends React.Component {
                             <span>Logged in as {this.state.user.username}</span>
                             <button onClick={() => this.logout()}>Logout</button>
                         </div>
-                        <TodoList />
+                        <TodosContainer />
                     </div>);
 
             default:
