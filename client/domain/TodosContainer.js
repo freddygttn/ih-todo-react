@@ -1,6 +1,7 @@
 import React from "react";
 import TaskApi from "../data/TaskApi";
 
+import Page from "../ui/Page";
 import TodoList from "../ui/todo/TodoList";
 
 /**
@@ -97,15 +98,17 @@ class TodosContainer extends React.Component {
     }
 
     render() {
-        return <TodoList
-            todos={this.state.todos}
-            error={this.state.error}
-            handleCreate={this.create}
-            handleRemove={this.remove}
-            handleUpdate={this.update}
-            edit={this.edit}
-            cancelEdit={this.cancelEdit}
-        />;
+        return <Page title="Todo List">
+            <TodoList
+                todos={this.state.todos}
+                error={this.state.error}
+                handleCreate={this.create}
+                handleRemove={this.remove}
+                handleUpdate={this.update}
+                edit={this.edit}
+                cancelEdit={this.cancelEdit}
+            />
+        </Page>;
     }
 }
 

@@ -1,8 +1,47 @@
 body {
   padding: 50px;
+  color: #333;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
 a {
   color: #00B7FF; }
+
+.Auth .Auth-Field {
+  display: block;
+  margin-bottom: 0.5rem; }
+  .Auth .Auth-Field > div {
+    font-weight: bold; }
+  .Auth .Auth-Field > input {
+    padding: 0.25rem; }
+
+.Auth .Auth-Error {
+  margin: 0.5rem 0;
+  height: 1rem;
+  color: red; }
+
+.TodoList {
+  padding: 0;
+  list-style: none; }
+  .TodoList li {
+    padding: 0.5rem 0; }
+
+.TodoEdition {
+  display: flex;
+  align-items: center; }
+  .TodoEdition .TodoEdition-Fields input {
+    padding: 0.25rem; }
+  .TodoEdition .TodoEdition-Actions {
+    padding-left: 0.5rem; }
+
+.Todo {
+  display: flex;
+  align-items: center; }
+  .Todo .Todo-Title {
+    font-weight: bold; }
+  .Todo .Todo-Description {
+    color: #666;
+    font-style: italic; }
+  .Todo .Todo-Actions {
+    padding-left: 0.5rem; }
 
 /*# sourceMappingURL=style.css.map */

@@ -23,56 +23,53 @@ class Login extends React.PureComponent {
 
     render() {
         return (
-            <div>
-                <h2>Login</h2>
-                <form onSubmit={(e) => {
-                    e.preventDefault();
-                    this.props.handleLogin(this.state.username.trim(), this.state.password);
-                }}>
-                    <div>
-                        <span>Username</span>
-                        <input
-                            type="text"
-                            placeholder="Username"
-                            value={this.state.username}
-                            onChange={(e) => {
-                                const username = e.target.value;
-                                this.setState((state) => ({ ...state, username }));
-                            }}
-                        />
-                    </div>
-                    <div>
-                        <span>Password</span>
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            value={this.state.password}
-                            onChange={(e) => {
-                                const password = e.target.value;
-                                this.setState((state) => ({ ...state, password }));
-                            }}
-                        />
-                    </div>
-                    <div>
-                        <input
-                            type="submit"
-                            value="Log In"
-                            disabled={this.isSubmitDisabled()}
-                        />
-                    </div>
-                    <div>
-                        {this.props.error ? this.props.error : ""}
-                    </div>
-                    <div>
-                        <a
-                            href="#"
-                            onClick={() => this.props.handleGoToSignUp()}
-                        >
-                            No account? Sign up
+            <form className="Auth" onSubmit={(e) => {
+                e.preventDefault();
+                this.props.handleLogin(this.state.username.trim(), this.state.password);
+            }}>
+                <label className="Auth-Field">
+                    <div>Username</div>
+                    <input
+                        type="text"
+                        placeholder="Username"
+                        value={this.state.username}
+                        onChange={(e) => {
+                            const username = e.target.value;
+                            this.setState((state) => ({ ...state, username }));
+                        }}
+                    />
+                </label>
+                <label className="Auth-Field">
+                    <div>Password</div>
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        value={this.state.password}
+                        onChange={(e) => {
+                            const password = e.target.value;
+                            this.setState((state) => ({ ...state, password }));
+                        }}
+                    />
+                </label>
+                <div className="Auth-Submit">
+                    <input
+                        type="submit"
+                        value="Log In"
+                        disabled={this.isSubmitDisabled()}
+                    />
+                </div>
+                <div className="Auth-Error">
+                    {this.props.error ? this.props.error : ""}
+                </div>
+                <div className="Auth-Link">
+                    <a
+                        href="#"
+                        onClick={() => this.props.handleGoToSignUp()}
+                    >
+                        No account? Sign up
                         </a>
-                    </div>
-                </form>
-            </div>
+                </div>
+            </form>
         );
     }
 }

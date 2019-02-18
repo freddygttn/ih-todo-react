@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import Api from "../data/AuthApi";
+import Page from "../ui/Page";
 import Login from "../ui/auth/Login";
 import SignUp from "../ui/auth/SignUp";
 import NotFound from "../ui/NotFound";
@@ -75,20 +76,24 @@ class AuthContainer extends React.Component {
     render() {
         switch (this.state.status) {
             case AuthStatus.Login:
-                return <Login
-                    handleLogin={this.login}
-                    handleGoToSignUp={() => this.setAuthStatus(AuthStatus.SignUp)}
-                    error={this.state.error}
-                    isRequesting={this.state.isRequesting}
-                />;
+                return <Page title="Log In">
+                    <Login
+                        handleLogin={this.login}
+                        handleGoToSignUp={() => this.setAuthStatus(AuthStatus.SignUp)}
+                        error={this.state.error}
+                        isRequesting={this.state.isRequesting}
+                    />
+                </Page>;
 
             case AuthStatus.SignUp:
-                return <SignUp
-                    handleSignUp={this.signUp}
-                    handleGoToLogin={() => this.setAuthStatus(AuthStatus.Login)}
-                    error={this.state.error}
-                    isRequesting={this.state.isRequesting}
-                />;
+                return <Page title="Sign Up">
+                    <SignUp
+                        handleSignUp={this.signUp}
+                        handleGoToLogin={() => this.setAuthStatus(AuthStatus.Login)}
+                        error={this.state.error}
+                        isRequesting={this.state.isRequesting}
+                    />
+                </Page>;
 
             default:
                 return <NotFound handleGoBack={() => this.setAuthStatus(AuthStatus.Login)} />;

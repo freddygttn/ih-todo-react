@@ -25,65 +25,62 @@ class SignUp extends React.PureComponent {
 
     render() {
         return (
-            <div>
-                <h2>SignUp</h2>
-                <form onSubmit={(e) => {
-                    e.preventDefault();
-                    this.props.handleSignUp(this.state.username, this.state.password, this.state.repeatPassword);
-                }}>
-                    <div>
-                        <span>Username</span>
-                        <input
-                            type="text"
-                            placeholder="Username"
-                            onChange={(e) => {
-                                const username = e.target.value;
-                                this.setState((state) => ({ ...state, username }));
-                            }}
-                        />
-                    </div>
-                    <div>
-                        <span>Password</span>
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            onChange={(e) => {
-                                const password = e.target.value;
-                                this.setState((state) => ({ ...state, password }));
-                            }}
-                        />
-                    </div>
-                    <div>
-                        <span>Repeat password</span>
-                        <input
-                            type="password"
-                            placeholder="Repeat password"
-                            onChange={(e) => {
-                                const repeatPassword = e.target.value;
-                                this.setState((state) => ({ ...state, repeatPassword }));
-                            }}
-                        />
-                    </div>
-                    <div>
-                        <input
-                            type="submit"
-                            value="Sign Up"
-                            disabled={this.isSubmitDisabled()}
-                        />
-                    </div>
-                    <div>
-                        {this.props.error ? this.props.error : ""}
-                    </div>
-                    <div>
-                        <a
-                            href="#"
-                            onClick={() => this.props.handleGoToLogin()}
-                        >
-                            Already have an account? Login
+            <form className="Auth" onSubmit={(e) => {
+                e.preventDefault();
+                this.props.handleSignUp(this.state.username, this.state.password, this.state.repeatPassword);
+            }}>
+                <label className="Auth-Field">
+                    <div>Username</div>
+                    <input
+                        type="text"
+                        placeholder="Username"
+                        onChange={(e) => {
+                            const username = e.target.value;
+                            this.setState((state) => ({ ...state, username }));
+                        }}
+                    />
+                </label>
+                <label className="Auth-Field">
+                    <div>Password</div>
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        onChange={(e) => {
+                            const password = e.target.value;
+                            this.setState((state) => ({ ...state, password }));
+                        }}
+                    />
+                </label>
+                <label className="Auth-Field">
+                    <div>Repeat password</div>
+                    <input
+                        type="password"
+                        placeholder="Repeat password"
+                        onChange={(e) => {
+                            const repeatPassword = e.target.value;
+                            this.setState((state) => ({ ...state, repeatPassword }));
+                        }}
+                    />
+                </label>
+                <div className="Auth-Submit">
+                    <input
+                        type="submit"
+                        value="Sign Up"
+                        disabled={this.isSubmitDisabled()}
+                    />
+                </div>
+                <div className="Auth-Error">
+                    {this.props.error ? this.props.error : ""}
+                </div>
+                <div className="Auth-Link">
+                    <a
+                        href="#"
+                        onClick={() => this.props.handleGoToLogin()}
+                    >
+                        Already have an account? Login
                         </a>
-                    </div>
-                </form>
-            </div>
+                </div>
+            </form>
         );
     }
 }

@@ -4,12 +4,14 @@ import PropTypes from "prop-types";
 /**
  * Renders a todo.
  */
-export const Todo = ({ todo, handleRemove, handleEdit, ...props }) => {
+export const Todo = ({ position, todo, handleRemove, handleEdit, ...props }) => {
     return (
-        <div>
-            <div>{todo.title}</div>
-            <div>{todo.description}</div>
+        <div className="Todo">
             <div>
+                <div className="Todo-Title">{todo.title}</div>
+                <div className="Todo-Description">{todo.description}</div>
+            </div>
+            <div className="Todo-Actions">
                 <button onClick={handleRemove}>Remove</button>
                 <button onClick={handleEdit}>Edit</button>
             </div>

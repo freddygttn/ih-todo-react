@@ -54,11 +54,11 @@ class TodoEdition extends React.PureComponent {
 
     render() {
         return (
-            <div>
-                <form onSubmit={e => {
-                    e.preventDefault();
-                    this.handleSubmit();
-                }}>
+            <form className="TodoEdition" onSubmit={e => {
+                e.preventDefault();
+                this.handleSubmit();
+            }}>
+                <div className="TodoEdition-Fields">
                     <div>
                         <input type="text"
                             placeholder="Title"
@@ -74,15 +74,15 @@ class TodoEdition extends React.PureComponent {
                             onChange={(e) => this.updateDescription(e.target.value)}
                         />
                     </div>
-                    <div>
-                        {this.props.error ? this.props.error : ""}
-                    </div>
-                    <div>
-                        <input type="submit" value={this.props.actionLabel} disabled={!this.canSubmit()} />
-                        {this.props.handleCancel && <button onClick={this.props.handleCancel}>Cancel</button>}
-                    </div>
-                </form>
-            </div>
+                </div>
+                <div className="TodoEdition-Actions">
+                    <input type="submit" value={this.props.actionLabel} disabled={!this.canSubmit()} />
+                    {this.props.handleCancel && <button onClick={this.props.handleCancel}>Cancel</button>}
+                </div>
+                <div className="TodoEdition-Error">
+                    {this.props.error ? this.props.error : ""}
+                </div>
+            </form>
         );
     }
 }

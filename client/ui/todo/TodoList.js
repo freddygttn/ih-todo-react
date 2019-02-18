@@ -10,44 +10,41 @@ import TodoEdition from "./TodoEdition";
 class TodoList extends React.PureComponent {
     render() {
         return (
-            <div>
-                <h2>Todo List</h2>
-                <ul>
-                    <li>
-                        <TodoEdition
-                            initialTodo={{ title: "", description: "" }}
-                            actionLabel={"Add"}
-                            handleAction={(title, description) => {
-                                this.props.handleCreate(title, description);
-                            }} />
-                    </li>
-                    {this.props.todos.map(todo => {
-                        return todo.editing ?
-                            (
-                                <li key={todo._id}>
-                                    <TodoEdition
-                                        initialTodo={todo}
-                                        actionLabel={"Update"}
-                                        handleCancel={() => this.props.cancelEdit(todo._id)}
-                                        handleAction={(title, description) => {
-                                            this.props.handleUpdate(todo._id, title, description);
-                                        }} />
-                                </li>
-                            )
-                            :
-                            (
-                                <li key={todo._id}>
-                                    <Todo
-                                        todo={todo}
-                                        handleRemove={() => this.props.handleRemove(todo._id)}
-                                        handleEdit={() => this.props.edit(todo._id)}
-                                    />
-                                </li>
-                            )
-                    })
-                    }
-                </ul>
-            </div>
+            <ul className="TodoList">
+                <li>
+                    <TodoEdition
+                        initialTodo={{ title: "", description: "" }}
+                        actionLabel={"Add"}
+                        handleAction={(title, description) => {
+                            this.props.handleCreate(title, description);
+                        }} />
+                </li>
+                {this.props.todos.map((todo, index) => {
+                    return todo.editing ?
+                        (
+                            <li key={todo._id}>
+                                <TodoEdition
+                                    initialTodo={todo}
+                                    actionLabel={"Update"}
+                                    handleCancel={() => this.props.cancelEdit(todo._id)}
+                                    handleAction={(title, description) => {
+                                        this.props.handleUpdate(todo._id, title, description);
+                                    }} />
+                            </li>
+                        )
+                        :
+                        (
+                            <li key={todo._id}>
+                                <Todo
+                                    todo={todo}
+                                    handleRemove={() => this.props.handleRemove(todo._id)}
+                                    handleEdit={() => this.props.edit(todo._id)}
+                                />
+                            </li>
+                        )
+                })
+                }
+            </ul>
         );
     }
 }

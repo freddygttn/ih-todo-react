@@ -1,0 +1,18 @@
+.TodoEdition {
+    display: flex;
+    align-items: center;
+
+    .TodoEdition-Fields {
+        input {
+            padding: 0.25rem;
+        }
+    }
+
+    .TodoEdition-Actions {
+        padding-left: 0.5rem;
+    }
+
+    .TodoEdition-Error {
+        
+    }
+}

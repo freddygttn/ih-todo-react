@@ -1,0 +1,23 @@
+.Auth {
+    .Auth-Field {
+        display: block;
+        margin-bottom: 0.5rem;
+        > div {
+            font-weight: bold;
+        }
+
+        > input {
+            padding: 0.25rem;
+        }
+    }
+
+    .Auth-Submit {}
+
+    .Auth-Error {
+        margin: 0.5rem 0;
+        height: 1rem;
+        color: red;
+    }
+
+    .Auth-Link {}
+}
