@@ -1,8 +1,14 @@
 body {
   padding: 50px;
+  color: #333;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
 }
+
+@import "./pages/auth";
+@import "./components/todo_list";
+@import "./components/todo_edition";
+@import "./components/todo";

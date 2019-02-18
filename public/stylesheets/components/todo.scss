@@ -1,0 +1,17 @@
+.Todo {
+    display: flex;
+    align-items: center;
+
+    .Todo-Title {
+        font-weight: bold;
+    }
+
+    .Todo-Description {
+        color: #666;
+        font-style: italic;
+    }
+
+    .Todo-Actions {
+        padding-left: 0.5rem;
+    }
+}

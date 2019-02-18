@@ -1,47 +1,49 @@
 import React from "react";
 import Api from "./data/AuthApi";
 
-import Login from "./Login";
-import SignUp from "./SignUp";
-import TodoList from "./TodoList";
+import AuthContainer from "./domain/AuthContainer";
+import TodosContainer from "./domain/TodosContainer";
+import NotFound from "./ui/NotFound";
 
-const Status = {
+// Status handled by this component
+const AppStatus = {
     "Loading": "STATUS/LOADING",
     "LoggedIn": "STATUS/LOGGED_IN",
-    "Login": "STATUS/LOGIN",
-    "SignUp": "STATUS/SIGN_UP"
+    "NeedAuth": "STATUS/NEED_AUTH",
 }
 
+/**
+ * Root of the app. Checks if a user is logged in and renders the component accordingly.
+ */
 class AppRoot extends React.Component {
     constructor() {
         super();
         this.state = {
-            status: Status.Loading,
+            status: AppStatus.Loading,
             user: null,
         };
     }
 
-    userLoggedIn(user) {
-        this.setState((state, props) => ({ ...state, status: Status.LoggedIn, user }));
+    setAppUser(user) {
+        this.setState((state, props) => ({ ...state, status: AppStatus.LoggedIn, user }));
     }
 
-    updateStatus(status) {
+    setAppStatus(status) {
         this.setState((state, props) => ({ ...state, status }));
     }
 
     componentDidMount() {
-        console.log("did mount");
         // Check logged in
         Api.isLoggedIn().then((response) => {
             this.setState((state, props) => ({
                 ...state,
-                status: Status.LoggedIn,
+                status: AppStatus.LoggedIn,
                 user: response.data,
             }));
         }).catch(error => {
             this.setState((state, props) => ({
                 ...state,
-                status: Status.Login
+                status: AppStatus.NeedAuth
             }));
         });
     }
@@ -51,7 +53,7 @@ class AppRoot extends React.Component {
             .then((response) => {
                 this.setState((state, props) => ({
                     ...state,
-                    status: Status.Login,
+                    status: AppStatus.NeedAuth,
                     user: null,
                 }))
             })
@@ -62,33 +64,27 @@ class AppRoot extends React.Component {
 
     render() {
         switch (this.state.status) {
-            case Status.Login:
-                return <Login
-                    userLoggedIn={(user) => this.userLoggedIn(user)}
-                    goToSignUp={() => this.updateStatus(Status.SignUp)} />;
-            case Status.SignUp:
-                return <SignUp
-                    userLoggedIn={(user) => this.userLoggedIn(user)}
-                    goToLogin={() => this.updateStatus(Status.Login)} />;
-            case Status.LoggedIn:
+            case AppStatus.Loading:
+                return (<div>
+                    Loading...
+                </div>);
+
+            case AppStatus.NeedAuth:
+                return <AuthContainer
+                    onUserLoggedIn={(user) => this.setAppUser(user)} />;
+
+            case AppStatus.LoggedIn:
                 return (
                     <div>
                         <div>
                             <span>Logged in as {this.state.user.username}</span>
                             <button onClick={() => this.logout()}>Logout</button>
                         </div>
-                        <TodoList />
+                        <TodosContainer />
                     </div>);
-            case Status.Loading:
-                return (<div>
-                    Loading...
-            </div>);
-            default:
-                return (<div>
-                    <span>There is nothing here...</span>
-                    <a href="#" onClick={() => this.updateStatus(Status.Login)}>Back to login</a>
-                </div>);
 
+            default:
+                return <NotFound handleGoBack={() => this.user ? this.setAppStatus(AppStatus.LoggedIn) : this.setAppStatus(AppStatus.NeedAuth)} />;
         }
     }
 }
