@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 export const Todo = ({ todo, handleRemove, handleEdit, ...props }) => {
     return (
@@ -12,5 +13,15 @@ export const Todo = ({ todo, handleRemove, handleEdit, ...props }) => {
         </div>
     );
 }
+
+Todo.propTypes = {
+    todo: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        description: PropTypes.string,
+    }).isRequired,
+    handleRemove: PropTypes.func.isRequired,
+    handleEdit: PropTypes.func.isRequired,
+};
 
 export default Todo;

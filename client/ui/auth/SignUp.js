@@ -1,25 +1,33 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-class SignUpView extends React.PureComponent {
+class SignUp extends React.PureComponent {
     render() {
         return (
             <div>
                 <h2>SignUp</h2>
-                <form>
+                <form onSubmit={(e) => {
+                    e.preventDefault();
+                    this.props.handleSignUp(this.userInput.value, this.passwordInput.value);
+                }}>
                     <div>
-                        <span>User</span>
-                        <input type="text" ref={e => this.userInput = e} />
+                        <span>Username</span>
+                        <input
+                            type="text"
+                            placeholder="Username"
+                            ref={e => this.userInput = e}
+                        />
                     </div>
                     <div>
                         <span>Password</span>
-                        <input type="password" ref={e => this.passwordInput = e} />
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            ref={e => this.passwordInput = e}
+                        />
                     </div>
                     <div>
-                        <button onClick={(e) => {
-                            e.preventDefault();
-                            this.props.handleSignUp(this.userInput.value, this.passwordInput.value);
-                        }}>Sign up</button>
+                        <input type="submit" value="Sign Up" />
                     </div>
                     <div>
                         {this.props.error ? this.props.error : ""}
@@ -33,10 +41,10 @@ class SignUpView extends React.PureComponent {
     }
 }
 
-SignUpView.propTypes = {
+SignUp.propTypes = {
     error: PropTypes.string,
     handleSignUp: PropTypes.func.isRequired,
     handleGoToLogin: PropTypes.func.isRequired,
 }
 
-export default SignUpView;
+export default SignUp;

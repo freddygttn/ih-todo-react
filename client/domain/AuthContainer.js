@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import Api from "../data/AuthApi";
-import LoginView from "../ui/LoginView";
-import SignUpView from "../ui/SignUpView";
-import NotFoundView from "../ui/NotFoundView";
+import Login from "../ui/auth/Login";
+import SignUp from "../ui/auth/SignUp";
+import NotFound from "../ui/NotFound";
 
 const AuthStatus = {
     "Login": "AUTH_STATUS/LOGIN",
@@ -60,21 +60,21 @@ class AuthContainer extends React.Component {
     render() {
         switch (this.state.status) {
             case AuthStatus.Login:
-                return <LoginView
+                return <Login
                     handleLogin={this.login}
                     handleGoToSignUp={() => this.setAuthStatus(AuthStatus.SignUp)}
                     error={this.state.error}
                 />;
 
             case AuthStatus.SignUp:
-                return <SignUpView
+                return <SignUp
                     handleSignUp={this.signUp}
                     handleGoToLogin={() => this.setAuthStatus(AuthStatus.Login)}
                     error={this.state.error}
                 />;
 
             default:
-                return <NotFoundView handleGoBack={() => this.setAuthStatus(AuthStatus.Login)} />;
+                return <NotFound handleGoBack={() => this.setAuthStatus(AuthStatus.Login)} />;
         }
     }
 }

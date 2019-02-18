@@ -1,7 +1,7 @@
 import React from "react";
 import TaskApi from "../data/TaskApi";
 
-import TodoList from "../ui/TodoList";
+import TodoList from "../ui/todo/TodoList";
 
 class TodosContainer extends React.Component {
     constructor() {

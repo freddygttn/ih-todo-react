@@ -1,25 +1,33 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-class LoginView extends React.PureComponent {
+class Login extends React.PureComponent {
     render() {
         return (
             <div>
                 <h2>Login</h2>
-                <form>
+                <form onSubmit={(e) => {
+                    e.preventDefault();
+                    this.props.handleLogin(this.userInput.value, this.passwordInput.value);
+                }}>
                     <div>
-                        <span>User</span>
-                        <input type="text" ref={e => this.userInput = e} />
+                        <span>Username</span>
+                        <input
+                            type="text"
+                            placeholder="Username"
+                            ref={e => this.userInput = e}
+                        />
                     </div>
                     <div>
                         <span>Password</span>
-                        <input type="password" ref={e => this.passwordInput = e} />
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            ref={e => this.passwordInput = e}
+                        />
                     </div>
                     <div>
-                        <button onClick={(e) => {
-                            e.preventDefault();
-                            this.props.handleLogin(this.userInput.value, this.passwordInput.value);
-                        }}>Log in</button>
+                        <input type="submit" value="Log in" />
                     </div>
                     <div>
                         {this.props.error ? this.props.error : ""}
@@ -33,10 +41,10 @@ class LoginView extends React.PureComponent {
     }
 }
 
-LoginView.propTypes = {
+Login.propTypes = {
     error: PropTypes.string,
     handleLogin: PropTypes.func.isRequired,
     handleGoToSignUp: PropTypes.func.isRequired,
 }
 
-export default LoginView;
+export default Login;

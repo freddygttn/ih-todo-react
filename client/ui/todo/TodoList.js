@@ -52,7 +52,7 @@ class TodoList extends React.PureComponent {
 TodoList.propTypes = {
     todos: PropTypes.arrayOf(PropTypes.shape({
         _id: PropTypes.string.isRequired,
-        title: PropTypes.string,
+        title: PropTypes.string.isRequired,
         description: PropTypes.string,
     })).isRequired,
     error: PropTypes.string,

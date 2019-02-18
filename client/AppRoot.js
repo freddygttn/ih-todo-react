@@ -3,6 +3,7 @@ import Api from "./data/AuthApi";
 
 import AuthContainer from "./domain/AuthContainer";
 import TodosContainer from "./domain/TodosContainer";
+import NotFound from "./ui/NotFound";
 
 const AppStatus = {
     "Loading": "STATUS/LOADING",
@@ -79,7 +80,7 @@ class AppRoot extends React.Component {
                     </div>);
 
             default:
-                return <NotFoundView handleGoBack={() => this.setAppStatus(AppStatus.NeedAuth)} />;
+                return <NotFound handleGoBack={() => this.user ? this.setAppStatus(AppStatus.LoggedIn) : this.setAppStatus(AppStatus.NeedAuth)} />;
         }
     }
 }
