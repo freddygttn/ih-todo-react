@@ -1,5 +1,5 @@
 import React from "react";
-import Api from "./Api";
+import Api from "./data/AuthApi";
 
 class SignUp extends React.Component {
     constructor() {
@@ -38,7 +38,7 @@ class SignUp extends React.Component {
                         <input type="password" ref={e => this.passwordInput = e} />
                     </div>
                     <div>
-                        <button onClick={(e) => { e.preventDefault(); this.signUp(); }}>Sign in</button>
+                        <button onClick={(e) => { e.preventDefault(); this.signUp(); }}>Sign up</button>
                     </div>
                     <div>
                         {this.state.error ? this.state.error : ""}
