@@ -16,7 +16,6 @@ class AppRoot extends React.Component {
     constructor() {
         super();
         this.state = {
-            title: "world",
             status: Status.Loading,
             user: null,
         };
@@ -72,18 +71,22 @@ class AppRoot extends React.Component {
                     userLoggedIn={(user) => this.userLoggedIn(user)}
                     goToLogin={() => this.updateStatus(Status.Login)} />;
             case Status.LoggedIn:
-                return (<div>
+                return (
                     <div>
-                        <span>Logged in as {this.state.user.username}</span>
-                        <button onClick={() => this.logout()}>Logout</button>
-                    </div>
-                    <TodoList />
-                </div>);
+                        <div>
+                            <span>Logged in as {this.state.user.username}</span>
+                            <button onClick={() => this.logout()}>Logout</button>
+                        </div>
+                        <TodoList />
+                    </div>);
+            case Status.Loading:
+                return (<div>
+                    Loading...
+            </div>);
             default:
                 return (<div>
-                    Hello {this.state.title}
-                    <div>{this.state.status}</div>
-
+                    <span>There is nothing here...</span>
+                    <a href="#" onClick={() => this.updateStatus(Status.Login)}>Back to login</a>
                 </div>);
 
         }
